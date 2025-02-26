@@ -1,0 +1,10 @@
+<html>
+    <h1> Register </h1>
+
+    <form method="post" autocomplete="off">
+        {% csrf_token %}
+        {{ RegisterForm }}
+        <input type="submit" value="Submit"/>
+
+    </form>
+</html>
