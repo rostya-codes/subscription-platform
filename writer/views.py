@@ -37,3 +37,31 @@ def my_articles(request):
     context = {'AllArticles': articles}
 
     return render(request, 'writer/my-articles.html', context)
+
+
+@login_required(login_url='my-login')
+def update_article(request, pk):
+    try:
+        article = Article.objects.get(id=pk, user=request.user)
+    except:
+        return redirect('my-articles')
+
+    form = ArticleForm(instance=article)  # Параметр instance нужен для предзаполнения формы
+
+    if request.method == 'POST':
+        form = ArticleForm(request.POST, instance=article)
+        if form.is_valid():
+            form.save()
+            return redirect('my-articles')
+
+    context = {'UpdateArticleForm': form}
+
+    return render(request, 'writer/update-article.html', context)
+
+
+@login_required(login_url='my-login')
+def delete_article(request, pk):
+    article = Article.objects.get(id=pk)
+    article.delete()
+
+    return redirect('my-articles')
