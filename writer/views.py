@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
 
-from . forms import ArticleForm
+from account.models import CustomUser
+from . forms import ArticleForm, UpdateUserForm
 from . models import Article
 
 
@@ -61,7 +61,46 @@ def update_article(request, pk):
 
 @login_required(login_url='my-login')
 def delete_article(request, pk):
-    article = Article.objects.get(id=pk)
-    article.delete()
+    try:
+        article = Article.objects.get(id=pk, user=request.user)
+    except:
+        return redirect('my-articles')
+    if request.method == 'POST':
+        article.delete()
 
-    return redirect('my-articles')
+        return redirect('my-articles')
+
+    context = {'article': article}
+
+    return render(request, 'writer/delete-article.html', context)
+
+
+@login_required(login_url='my-login')
+def account_management(request):
+    form = UpdateUserForm(instance=request.user)
+    if request.method == 'POST':
+        form = UpdateUserForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('account-management')
+
+    context = {'UpdateUserForm': form}
+
+    return render(request, 'writer/account-management.html', context)
+
+
+@login_required(login_url='my-login')
+def delete_account(request):
+    try:
+        user = CustomUser.objects.get(pk=request.user.id)
+    except:
+        return redirect('account-management')
+
+    if request.method == 'POST':
+        user.delete()
+        return redirect('my-login')
+
+    context = {'user': user}
+
+    return render(request, 'writer/delete-account.html', context)
+
