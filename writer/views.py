@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
 from account.models import CustomUser
-from . forms import ArticleForm, UpdateUserForm
+from account.forms import UpdateUserForm
+from . forms import ArticleForm
 from . models import Article
 
 

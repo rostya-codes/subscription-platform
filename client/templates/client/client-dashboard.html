@@ -5,4 +5,24 @@
     <div class="container bg-white shadow-md p-5 form-layout text-center">
         <h5>👋 Welcome, {{ user.first_name }}</h5>
     </div>
+
+    <br>
+
+    <div class="container bg-white shadow-md p-5 form-layout text-center">
+        <h5>Subscription plan:</h5>
+        <p>{{ SubPlan }}</p>
+        {% if SubPlan is not None %}
+            {% if IsActive %}
+                <br>
+                <h5>Subscription status:</h5>
+                <p>Active</p>
+            {% else %}
+                <br>
+                <h5>Subscription status:</h5>
+                <p>Inactive</p>
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <br>
 {% endblock %}
