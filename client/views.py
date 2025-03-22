@@ -70,4 +70,26 @@ def account_management(request):
 
 @login_required(login_url='my-login')
 def create_subscription(request, sub_id, plan):
+    user = CustomUser.objects.get(pk=request.user.id)
 
+    first_name = user.first_name
+    last_name = user.last_name
+
+    full_name = first_name + ' ' + last_name
+
+    sub_cost = 0
+
+    if plan == 'Standard':
+        sub_cost = '4.99'
+    elif plan == 'Premium':
+        sub_cost = '9.99'
+
+    subscription = Subscription.objects.create(
+        subscriber_name=full_name, subscription_plan=plan,
+        subscription_cost=sub_cost, paypal_subscription_id=sub_id,
+        is_active=True, user=user
+    )
+
+    context = {'SubscriptionPlan': plan}
+
+    return render(request, 'client/create-subscription.html', context)
