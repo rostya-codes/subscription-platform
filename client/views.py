@@ -5,6 +5,7 @@ from account.models import CustomUser
 from writer.models import Article
 from . models import Subscription
 from account.forms import UpdateUserForm
+from . paypal import *
 
 
 @login_required(login_url='my-login')
@@ -55,17 +56,24 @@ def subscription_plans(request):
 
 @login_required(login_url='my-login')
 def account_management(request):
-    client = CustomUser.objects.get(pk=request.user.id)
-    form = UpdateUserForm(instance=client)
+    form = UpdateUserForm(instance=request.user)
     if request.method == 'POST':
-        form = UpdateUserForm(request.POST, instance=client)
+        form = UpdateUserForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
             return redirect('client-account-management')
 
-    context = {'UpdateUserForm': form}
+    try:
+        sub_details = Subscription.objects.get(user=request.user)
+        sub_id = sub_details.paypal_subscription_id
 
-    return render(request, 'client/account-management.html', context)
+        context = {'UpdateUserForm': form, 'SubscriptionID': sub_id}
+
+        return render(request, 'client/account-management.html', context)
+    except:
+        context = {'UpdateUserForm': form}
+
+        return render(request, 'client/account-management.html', context)
 
 
 @login_required(login_url='my-login')
@@ -93,3 +101,20 @@ def create_subscription(request, sub_id, plan):
     context = {'SubscriptionPlan': plan}
 
     return render(request, 'client/create-subscription.html', context)
+
+
+@login_required(login_url='my-login')
+def delete_subscription(request, sub_id = None):
+
+    try:
+        # Delete subscription form PayPal
+        access_token = get_access_token()
+        cancel_subscription_paypal(access_token, sub_id)
+
+        # Delete a subscription from Django
+        subscription = Subscription.objects.get(user=request.user, paypal_subscription_id=sub_id)
+        subscription.delete()
+    except Exception as e:
+        print(e)
+
+    return render(request, 'client/delete-subscription.html')

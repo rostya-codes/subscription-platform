@@ -1,0 +1,31 @@
+{% extends 'client/navbar.html' %}
+
+{% block content %}
+
+<br>
+
+<div class="container bg-white shadow-md p-5 form-layout text-center">
+
+    <h5>Subscription cancelled!</h5>
+
+    <br>
+
+    <h1>❌</h1>
+
+    <br>
+
+    <p>
+        We regret to inform you that your subscription has been cancelled
+
+        as per your request. Thank you for your past support!
+    </p>
+
+    <a class="btn btn-success" type="button" href="{% url 'client-dashboard' %}">
+
+        > &nbsp; Return to dashboard
+
+    </a>
+
+</div>
+
+{% endblock %}
