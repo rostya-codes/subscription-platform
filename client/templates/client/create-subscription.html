@@ -1,0 +1,31 @@
+{% extends 'client/navbar.html' %}
+
+{% block content %}
+
+<br>
+
+<div class="container bg-white shadow-md p-5 form-layout text-center">
+
+    <h5>{{ SubscriptionPlan }} subscription activated! </h5>
+
+    <br>
+
+    <h1>✅</h1>
+
+    <br>
+
+    <p>
+        Congratulations on activating your {{ SubscriptionPlan }} subscription!
+
+        You are now eligible for the perks that are associated with this plan.
+    </p>
+
+    <a class="btn btn-success" type="button" href="{% url 'browse-articles' %}">
+
+        > &nbsp; Browse articles
+
+    </a>
+
+</div>
+
+{% endblock %}

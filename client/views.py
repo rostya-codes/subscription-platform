@@ -77,7 +77,7 @@ def create_subscription(request, sub_id, plan):
 
     full_name = first_name + ' ' + last_name
 
-    sub_cost = 0
+    sub_cost = None
 
     if plan == 'Standard':
         sub_cost = '4.99'

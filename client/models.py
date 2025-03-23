@@ -12,7 +12,7 @@ class Subscription(models.Model):
 
     is_active = models.BooleanField(default=False)
 
-    user = models.ForeignKey(to=CustomUser, max_length=10, on_delete=models.CASCADE, unique=True)
+    user = models.OneToOneField(to=CustomUser, on_delete=models.CASCADE, max_length=10)
 
     def __str__(self):
         return f'{self.subscriber_name} - {self.subscription_plan} subscription'
