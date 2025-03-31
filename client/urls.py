@@ -14,4 +14,5 @@ urlpatterns = [
     path('delete-subscription/<sub_id>', views.delete_subscription, name='delete-subscription'),
     path('update-subscription/<sub_id>', views.update_subscription, name='update-subscription'),
     path('paypal-update-sub-confirmed', views.paypal_update_sub_confirmed, name='paypal-update-sub-confirmed'),
+    path('django-update-sub-confirmed/<sub_id>', views.django_update_sub_confirmed, name='django-update-sub-confirmed'),
 ]

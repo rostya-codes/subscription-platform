@@ -143,3 +143,28 @@ def paypal_update_sub_confirmed(request):
         return render(request, 'client/paypal-update-sub-confirmed.html', context)
     except:
         return render(request, 'client/paypal-update-sub-confirmed.html')
+
+
+@login_required(login_url='my-login')
+def django_update_sub_confirmed(request, sub_id):
+    access_token = get_access_token()
+    current_plan_id = get_current_subscription(access_token, sub_id)
+    if current_plan_id == 'P-4NS387979K059831DM7OXKXQ':  # Standard
+        new_plan_name = 'Standard'
+        new_cost = 4.99
+
+        Subscription.objects.filter(paypal_subscription_id=sub_id).update(
+            subscription_plan=new_plan_name,
+            subscription_cost=new_cost
+        )
+
+    elif current_plan_id == 'P-9K333039403981241M7OXXEI':  # Premium
+        new_plan_name = 'Premium'
+        new_cost = 9.99
+
+        Subscription.objects.filter(paypal_subscription_id=sub_id).update(
+            subscription_plan=new_plan_name,
+            subscription_cost=new_cost
+        )
+
+    return render(request, 'client/django-update-sub-confirmed.html')

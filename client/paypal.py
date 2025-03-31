@@ -74,3 +74,24 @@ def update_subscription_paypal(access_token, sub_id):
         return approve_link
     else:
         print('Sorry, an error occurred!')
+
+
+def get_current_subscription(access_token, sub_id):
+    bearer_token = 'Bearer ' + access_token
+    headers = {
+        'Content-Type': 'application/json',
+        'Authorization': bearer_token,
+    }
+
+    url = f'https://api.sandbox.paypal.com/v1/billing/subscriptions/{sub_id}'
+
+    r = requests.get(url, headers=headers)
+
+    if r.status_code == 200:
+        subscription_data = r.json()
+        current_plan_id = subscription_data.get('plan_id')
+        return current_plan_id
+
+    else:
+        print('Failed to retrieve subscription details')
+        return None

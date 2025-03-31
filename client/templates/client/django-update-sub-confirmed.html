@@ -1,0 +1,31 @@
+{% extends 'client/navbar.html' %}
+
+{% block content %}
+
+<br>
+
+<div class="container bg-white shadow-md p-5 form-layout text-center">
+
+    <h5>Final approval confirmed!</h5>
+
+    <br>
+
+    <h1>✅</h1>
+
+    <br>
+
+    <p>
+        We're pleased to inform that your request to
+
+        update your subscription has been processed and approved on your account!
+    </p>
+
+    <a class="btn btn-success" type="button" href="{% url 'client-dashboard' %}">
+
+        > &nbsp; Return to dashboard
+
+    </a>
+
+</div>
+
+{% endblock %}
