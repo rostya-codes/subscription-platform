@@ -40,6 +40,23 @@
 {% if SubscriptionID %}
 
 <div class="container bg-white shadow-md p-5 form-layout text-center">
+    <h5>Update your subscription</h5>
+
+    <hr>
+
+    <p>Upgrade or downgrade your subscription by clicking the button below</p>
+
+    <br>
+
+    <a class="btn btn-info" type="button" href="{% url 'update-subscription' SubscriptionID %}">
+        > &nbsp; Update subscription
+    </a>
+
+</div>
+
+<br>
+
+<div class="container bg-white shadow-md p-5 form-layout text-center">
     <h5>Cancel your subscription</h5>
 
     <hr>

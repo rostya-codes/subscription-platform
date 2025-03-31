@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
 from account.models import CustomUser
@@ -118,3 +119,27 @@ def delete_subscription(request, sub_id = None):
         print(e)
 
     return render(request, 'client/delete-subscription.html')
+
+
+@login_required(login_url='my-login')
+def update_subscription(request, sub_id):
+    access_token = get_access_token()
+
+    # approve_link = Hateoas link from PayPal
+    approve_link = update_subscription_paypal(access_token, sub_id)
+    if approve_link:
+        return redirect(approve_link)
+    else:
+        return HttpResponse('Unable to obtain the approval link')
+
+
+@login_required(login_url='my-login')
+def paypal_update_sub_confirmed(request):
+    try:
+        sub_details = Subscription.objects.get(user=request.user)
+        subscription_id = sub_details.paypal_subscription_id
+        context = {'SubscriptionID': subscription_id}
+
+        return render(request, 'client/paypal-update-sub-confirmed.html', context)
+    except:
+        return render(request, 'client/paypal-update-sub-confirmed.html')
