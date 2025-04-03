@@ -21,7 +21,7 @@
 
         <hr>
 
-        <div id="paypal-button-container-P-4NS387979K059831DM7OXKXQ"></div>
+        <div id="paypal-button-container-P-6JS80290PP7576504M7VHMGQ"></div>
 
         <!--CLIENT ID-->
         <script src="https://www.paypal.com/sdk/js?client-id=AaNEZVd0WmkEgVyEoQHiRqxpMrJc5rA5snyAtrZYndR9T5KwPC_BHDgxDD5t3EM4QT1C2wt3ByP1LJz1&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
@@ -36,14 +36,14 @@
           createSubscription: function(data, actions) {
             return actions.subscription.create({
               /* Creates the subscription */
-              plan_id: 'P-4NS387979K059831DM7OXKXQ'
+              plan_id: 'P-6JS80290PP7576504M7VHMGQ'
             });
           },
           onApprove: function(data, actions) {
             var current_url = '/client/create-subscription/' + data.subscriptionID + "/Standard"
             window.open(current_url, '_self')
           }
-        }).render('#paypal-button-container-P-4NS387979K059831DM7OXKXQ'); // Renders the PayPal button
+        }).render('#paypal-button-container-P-6JS80290PP7576504M7VHMGQ'); // Renders the PayPal button
         </script>
     </div>
 
@@ -60,7 +60,7 @@
 
         <hr>
 
-        <div id="paypal-button-container-P-9K333039403981241M7OXXEI"></div>
+        <div id="paypal-button-container-P-9US4287463251591KM7VHNBA"></div>
 
         <!--PREMIUM PLAN LOGIC-->
         <script>
@@ -74,14 +74,14 @@
               createSubscription: function(data, actions) {
                 return actions.subscription.create({
                   /* Creates the subscription */
-                  plan_id: 'P-9K333039403981241M7OXXEI'
+                  plan_id: 'P-9US4287463251591KM7VHNBA'
                 });
               },
               onApprove: function(data, actions) {
                 var current_url = '/client/create-subscription/' + data.subscriptionID + "/Premium"
                 window.open(current_url, '_self')
               }
-          }).render('#paypal-button-container-P-9K333039403981241M7OXXEI'); // Renders the PayPal button
+          }).render('#paypal-button-container-P-9US4287463251591KM7VHNBA'); // Renders the PayPal button
         </script>
 
     </div>

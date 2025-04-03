@@ -149,7 +149,7 @@ def paypal_update_sub_confirmed(request):
 def django_update_sub_confirmed(request, sub_id):
     access_token = get_access_token()
     current_plan_id = get_current_subscription(access_token, sub_id)
-    if current_plan_id == 'P-4NS387979K059831DM7OXKXQ':  # Standard
+    if current_plan_id == 'P-6JS80290PP7576504M7VHMGQ':  # Standard
         new_plan_name = 'Standard'
         new_cost = 4.99
 
@@ -158,7 +158,7 @@ def django_update_sub_confirmed(request, sub_id):
             subscription_cost=new_cost
         )
 
-    elif current_plan_id == 'P-9K333039403981241M7OXXEI':  # Premium
+    elif current_plan_id == 'P-9US4287463251591KM7VHNBA':  # Premium
         new_plan_name = 'Premium'
         new_cost = 9.99
 

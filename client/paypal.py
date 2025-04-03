@@ -45,9 +45,9 @@ def update_subscription_paypal(access_token, sub_id):
     new_sub_plan_id = None
 
     if current_sub_plan == 'Standard':
-        new_sub_plan_id = 'P-9K333039403981241M7OXXEI' # To premium
+        new_sub_plan_id = 'P-9US4287463251591KM7VHNBA' # To premium
     elif current_sub_plan == 'Premium':
-        new_sub_plan_id = 'P-4NS387979K059831DM7OXKXQ' # To standard
+        new_sub_plan_id = 'P-6JS80290PP7576504M7VHMGQ' # To standard
 
     url = 'https://api.sandbox.paypal.com/v1/billing/subscriptions/' + sub_id + '/revise'
 
