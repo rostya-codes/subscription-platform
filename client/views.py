@@ -52,7 +52,11 @@ def subscription_locked(request):
 
 @login_required(login_url='my-login')
 def subscription_plans(request):
-    return render(request, 'client/subscription-plans.html')
+
+    if not Subscription.objects.filter(user=request.user).exists():
+        return render(request, 'client/subscription-plans.html')
+    else:
+        return redirect('client-dashboard')
 
 
 @login_required(login_url='my-login')
@@ -81,27 +85,31 @@ def account_management(request):
 def create_subscription(request, sub_id, plan):
     user = CustomUser.objects.get(pk=request.user.id)
 
-    first_name = user.first_name
-    last_name = user.last_name
+    if not Subscription.objects.filter(user=request.user).exists():
 
-    full_name = first_name + ' ' + last_name
+        first_name = user.first_name
+        last_name = user.last_name
 
-    sub_cost = None
+        full_name = first_name + ' ' + last_name
 
-    if plan == 'Standard':
-        sub_cost = '4.99'
-    elif plan == 'Premium':
-        sub_cost = '9.99'
+        sub_cost = None
 
-    subscription = Subscription.objects.create(
-        subscriber_name=full_name, subscription_plan=plan,
-        subscription_cost=sub_cost, paypal_subscription_id=sub_id,
-        is_active=True, user=user
-    )
+        if plan == 'Standard':
+            sub_cost = '4.99'
+        elif plan == 'Premium':
+            sub_cost = '9.99'
 
-    context = {'SubscriptionPlan': plan}
+        subscription = Subscription.objects.create(
+            subscriber_name=full_name, subscription_plan=plan,
+            subscription_cost=sub_cost, paypal_subscription_id=sub_id,
+            is_active=True, user=user
+        )
 
-    return render(request, 'client/create-subscription.html', context)
+        context = {'SubscriptionPlan': plan}
+
+        return render(request, 'client/create-subscription.html', context)
+    else:
+        return redirect('client-dashboard')
 
 
 @login_required(login_url='my-login')
@@ -117,6 +125,7 @@ def delete_subscription(request, sub_id = None):
         subscription.delete()
     except Exception as e:
         print(e)
+        return redirect('client-dashboard')
 
     return render(request, 'client/delete-subscription.html')
 

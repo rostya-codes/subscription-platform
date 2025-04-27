@@ -20,6 +20,11 @@
 
 <br>
 
+{% if SubscriptionID %}
+
+<!-- IF there is a SubscriptionID then display no subscription plans (link)-->
+
+{% else %}
 <div class="container bg-white shadow-md p-5 form-layout text-center">
     <h5>Browse subscription plans</h5>
 
@@ -34,6 +39,7 @@
     </a>
 
 </div>
+{% endif %}
 
 <br>
 
