@@ -54,7 +54,7 @@
 
     <br>
 
-    <a class="btn btn-info" type="button" href="{% url 'update-subscription' SubscriptionID %}">
+    <a id="updateButton" class="btn btn-info" type="button" href="{% url 'update-subscription' SubscriptionID %}">
         > &nbsp; Update subscription
     </a>
 
@@ -71,7 +71,7 @@
 
     <br>
 
-    <a class="btn btn-danger" type="button" href="{% url 'delete-subscription' SubscriptionID %}">
+    <a id="deleteButton" class="btn btn-danger" type="button" href="{% url 'delete-subscription' SubscriptionID %}">
         > &nbsp; Delete subscription
     </a>
 
@@ -94,5 +94,21 @@
 </div>
 
 <br>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    $(document).ready(function (){
+        $('#deleteButton').on('click', function (){
+            $(this).text('Processing...');
+        });
+    });
+
+    $(document).ready(function (){
+        $('#updateButton').on('click', function (){
+            $(this).text('Processing...');
+        });
+    });
+</script>
 
 {% endblock %}

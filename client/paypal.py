@@ -9,7 +9,7 @@ def get_access_token():
     data = {'grant_type': 'client_credentials'}
     headers = {'Accept': 'application/json', 'Accept-Language': 'en-US'}
 
-    url = 'https://api.sandbox.paypal.com/v1/oauth2/token'
+    url = 'https://api.paypal.com/v1/oauth2/token'
     r = requests.post(url, auth=(client_id, secret_key), headers=headers, data=data).json()
 
     access_token = r['access_token']
@@ -24,7 +24,7 @@ def cancel_subscription_paypal(access_token, sub_id):
         'Authorization': bearer_token,
     }
 
-    url = 'https://api.sandbox.paypal.com/v1/billing/subscriptions/' + sub_id + '/cancel'
+    url = 'https://api.paypal.com/v1/billing/subscriptions/' + sub_id + '/cancel'
     r = requests.post(url, headers=headers)
 
     print(r.status_code)
@@ -49,7 +49,7 @@ def update_subscription_paypal(access_token, sub_id):
     elif current_sub_plan == 'Premium':
         new_sub_plan_id = 'P-6JS80290PP7576504M7VHMGQ' # To standard
 
-    url = 'https://api.sandbox.paypal.com/v1/billing/subscriptions/' + sub_id + '/revise'
+    url = 'https://api.paypal.com/v1/billing/subscriptions/' + sub_id + '/revise'
 
     revision_data = {
         'plan_id': new_sub_plan_id
@@ -83,7 +83,7 @@ def get_current_subscription(access_token, sub_id):
         'Authorization': bearer_token,
     }
 
-    url = f'https://api.sandbox.paypal.com/v1/billing/subscriptions/{sub_id}'
+    url = f'https://api.paypal.com/v1/billing/subscriptions/{sub_id}'
 
     r = requests.get(url, headers=headers)
 
