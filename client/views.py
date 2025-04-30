@@ -90,6 +90,22 @@ def account_management(request):
 
 
 @login_required(login_url='my-login')
+def delete_account(request):
+    try:
+        user = CustomUser.objects.get(pk=request.user.id)
+    except:
+        return redirect('account-management')
+
+    if request.method == 'POST':
+        user.delete()
+        return redirect('my-login')
+
+    context = {'user': user}
+
+    return render(request, 'client/delete-account.html', context)
+
+
+@login_required(login_url='my-login')
 def create_subscription(request, sub_id, plan):
     user = CustomUser.objects.get(pk=request.user.id)
 
