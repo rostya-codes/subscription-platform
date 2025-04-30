@@ -61,14 +61,14 @@ def subscription_plans(request):
 
 @login_required(login_url='my-login')
 def account_management(request):
-    form = UpdateUserForm(instance=request.user)
-    if request.method == 'POST':
-        form = UpdateUserForm(request.POST, instance=request.user)
-        if form.is_valid():
-            form.save()
-            return redirect('client-account-management')
-
     try:
+        form = UpdateUserForm(instance=request.user)
+        if request.method == 'POST':
+            form = UpdateUserForm(request.POST, instance=request.user)
+            if form.is_valid():
+                form.save()
+                return redirect('client-account-management')
+
         sub_details = Subscription.objects.get(user=request.user)
         sub_id = sub_details.paypal_subscription_id
 
@@ -76,6 +76,14 @@ def account_management(request):
 
         return render(request, 'client/account-management.html', context)
     except:
+
+        form = UpdateUserForm(instance=request.user)
+        if request.method == 'POST':
+            form = UpdateUserForm(request.POST, instance=request.user)
+            if form.is_valid():
+                form.save()
+                return redirect('client-dashboard')
+
         context = {'UpdateUserForm': form}
 
         return render(request, 'client/account-management.html', context)
