@@ -26,11 +26,11 @@
 
         <hr>
 
-        <a href="{% url 'update-article' article.id %}">Update article</a>
+        <a class="btn btn-info w-100 p-2" href="{% url 'update-article' article.id %}">Update article</a>
 
-        <br>
+        <br><br>
 
-        <a href="{% url 'delete-article' article.id %}">Delete article</a>
+        <a class="btn btn-danger w-100 p-2" href="{% url 'delete-article' article.id %}">Delete article</a>
 
     </div>
 

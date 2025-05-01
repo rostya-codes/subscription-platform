@@ -5,6 +5,8 @@
 <div class="container bg-white shadow-md p-5 form-layout">
     <h3>Account deletion</h3>
 
+    <hr>
+
     <h6>{{ user.title }}</h6>
 
     <br>
@@ -13,7 +15,7 @@
 
     <form method="post" autocomplete="off">
         {% csrf_token %}
-        <input class="btn btn-danger" type="submit" value="Delete account"/>
+        <input class="btn btn-danger w-100 p-2" type="submit" value="Delete account"/>
     </form>
 
     <br>

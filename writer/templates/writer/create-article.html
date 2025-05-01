@@ -6,13 +6,17 @@
 <br>
 <div class="container bg-white shadow-md p-5 form-layout">
     <h3>Create an article</h3>
-    <p>You may create an article below:</p>
+
+    <hr>
+
+    <p>As a writer you can post both standard and premium articles below:</p>
+
     <br>
 
     <form method="post" autocomplete="off">
         {% csrf_token %}
         {{ CreateArticleForm|crispy }}
-        <input class="btn btn-success" type="submit" value="Create article"/>
+        <input class="btn btn-success w-100" type="submit" value="Create article"/>
     </form>
 </div>
 {% endblock %}

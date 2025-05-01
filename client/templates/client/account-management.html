@@ -14,7 +14,7 @@
     <form method="post" autocomplete="off">
         {% csrf_token %}
         {{ UpdateUserForm|crispy }}
-        <input class="btn btn-success" type="submit" value="Save"/>
+        <input class="btn btn-success w-100" type="submit" value="Update details"/>
     </form>
 </div>
 
@@ -35,7 +35,7 @@
     <br>
 
     <a class="btn btn-success" type="button" href="{% url 'subscription-plans' %}">
-        > &nbsp; View subscription plans
+        View subscription plans
     </a>
 
 </div>
@@ -85,7 +85,7 @@
 
     <h3>Account deletion</h3>
 
-    <br>
+    <hr>
 
     <p>Proceed below to delete your account:</p>
 

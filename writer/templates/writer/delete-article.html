@@ -13,12 +13,12 @@
 
     <form method="post" autocomplete="off">
         {% csrf_token %}
-        <input class="btn btn-danger" type="submit" value="Delete article"/>
+        <input class="btn btn-danger w-100 p-2" type="submit" value="Delete article"/>
     </form>
 
     <br>
 
-    <a href="{% url 'my-articles' %}">Return to articles</a>
+    <a href="{% url 'my-articles' %}"> Return to articles</a>
 
 </div>
 {% endblock %}
