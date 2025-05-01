@@ -1,0 +1,29 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edenthought</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width-device-width, initial-scale=1, maximum-scale=1"/>
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/lux/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+<br>
+
+    <div class="container bg-white shadow-md p-5 form-layout">
+        <h4>Account unverified!</h4>
+
+        <hr>
+
+        <p>
+            Sorry, but your account was not verified!
+        </p>
+
+        <a href="{% url 'register' %}">Re-create your account</a>
+
+    </div>
+
+</body>
+</html>

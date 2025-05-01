@@ -114,12 +114,12 @@ def email_verification(request, uidb64, token):
 
 
 def email_verification_sent(request):
-    pass
+    return render(request, 'account/email-verification-sent.html')
 
 
 def email_verification_success(request):
-    pass
+    return render(request, 'account/email-verification-success.html')
 
 
 def email_verification_failed(request):
-    pass
+    return render(request, 'account/email-verification-failed.html')
